@@ -1,6 +1,7 @@
 import React from "react";
 import { useAuth } from "../context/AuthContext";
 import { NavLink } from "react-router";
+import Profile from './Profile';
 
 export default function Home() {
   const { user, isLogin, isLoading, LogOut } = useAuth();
@@ -17,32 +18,20 @@ export default function Home() {
     );
   }
 
-  if (user?.uid) {
-    return (
-      <div>
-        <h1>
-          welcome {user?.uid}
-          <br />
-          {user?.displayName}
-        </h1>
-        <p>please visite your profile</p>
-        <NavLink to="/profile">Profile </NavLink>
-        <button onClick={LogOut}> logout</button>
-      </div>
-    );
-  }
+  
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-100 to-slate-300">
       <div className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-md text-center">
         <h2 className="text-2xl font-bold text-gray-800">Welcome</h2>
-        <p className="mt-2 text-gray-500">
-          If you already have an account, please login. If you don’t have an
-          account, create one.
-        </p>
+       {
+        !user?.uid? <p className="text-gray-600 mt-2">Please login to access your profile</p> : <p className="text-gray-600 mt-2">You are logged in as {user?.displayName}</p>
+       }
 
         <div className="mt-6 flex gap-4 justify-center">
-          <NavLink
+        {
+          !user?.uid? (<div>
+              <NavLink
             to="/login"
             className="px-6 py-2 rounded-xl bg-indigo-600 text-white font-medium hover:bg-indigo-700 transition"
           >
@@ -54,6 +43,14 @@ export default function Home() {
           >
             Sign Up
           </NavLink>
+          </div>):
+                    <NavLink
+            to="/profile"
+            className="px-6 py-2 rounded-xl bg-indigo-600 text-white font-medium hover:bg-indigo-700 transition"
+          >
+            Profile
+          </NavLink>
+        }
         </div>
       </div>
     </div>

@@ -9,6 +9,7 @@ import auth, { db } from "../firebase/firebase";
 import { doc, setDoc } from "firebase/firestore";
 
 import { NavLink, useNavigate } from "react-router";
+import SignUp_With_Google from "../components/googleSignup/SignUP_With_Google";
 
 export default function SignUp() {
   //class name
@@ -20,42 +21,13 @@ export default function SignUp() {
   //
   const navigae = useNavigate();
   //
-  //   const handleSubmit = async (e) => {
-  //     e.preventDefault();
-  //     const form = e.target;
-  //     const name = form.name.value;
-  //     const email = form.email.value;
-  //     const password = form.password.value;
-  //     // handleSignUp(name,email,password)
-  //  try {
-  //   const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-  //   const user = userCredential.user;
-  //   if (user) {
-  //     await updateProfile(auth.currentUser, {
-  //       displayName: name,
-  //     });
-  //     navigae("/profile");
-  //   }
-
-  //     await setDoc(doc(db,"users",user.uid),{
-  //       name:name,
-  //       email:email,
-  //       uid:user.uid
-  //     })
-
-  //  } catch (error) {
-  //   setError(error.message);
-  //  }
-  //     form.reset();
-  //   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
     const name = form.name.value;
     const email = form.email.value;
     const password = form.password.value;
-
+    // handleSignUp(name,email,password)
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
@@ -64,26 +36,59 @@ export default function SignUp() {
       );
       const user = userCredential.user;
 
-      // update profile
-      await updateProfile(user, {
-        displayName: name,
-      });
-      console.log("Firestore writing user:", user.uid);
-      // save to firestore
       await setDoc(doc(db, "users", user.uid), {
         name: name,
         email: email,
-        role: "user",
         uid: user.uid,
+        roll: "user",
       });
-
-      navigae("/profile");
+      if (user) {
+        await updateProfile(auth.currentUser, {
+          displayName: name,
+        });
+        navigae("/profile");
+      }
     } catch (error) {
       setError(error.message);
     }
-
     form.reset();
   };
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   const form = e.target;
+  //   const name = form.name.value;
+  //   const email = form.email.value;
+  //   const password = form.password.value;
+
+  //   try {
+  //     const userCredential = await createUserWithEmailAndPassword(
+  //       auth,
+  //       email,
+  //       password,
+  //     );
+  //     const user = userCredential.user;
+
+  //     // update profile
+  //     await updateProfile(user, {
+  //       displayName: name,
+  //     });
+  //     console.log("Firestore writing user:", user.uid);
+  //     // save to firestore
+  //     await setDoc(doc(db, "users", user.uid), {
+  //       name: name,
+  //       email: email,
+  //       role: "user",
+  //       uid: user.uid,
+  //     });
+
+  //     navigae("/profile");
+  //   } catch (error) {
+  //     setError(error.message);
+  //   }
+
+  //   form.reset();
+  // };
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-2 md:p-4">
       <div className="w-full max-w-md mx-2">
@@ -175,7 +180,7 @@ export default function SignUp() {
           </div>
 
           {/* Social Login - Stack on mobile, side by side on tablet/desktop */}
-          {/* <SignIn_With_Google error={error} setError={setError} navigate={navigate}/> */}
+          <SignUp_With_Google/>
 
           {/* Login Link */}
           <div className="text-center py-2 md:pt-4">

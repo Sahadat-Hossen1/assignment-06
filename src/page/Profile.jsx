@@ -28,9 +28,9 @@ export default function Profile() {
             />
           </div> */}
 
-        {/* <span className="inline-block mt-4 px-4 py-1 text-sm rounded-full bg-indigo-100 text-indigo-600 font-semibold">
-            {roll}
-          </span> */}
+        <span className="inline-block mt-4 px-4 py-1 text-sm rounded-full bg-indigo-100 text-indigo-600 font-semibold">
+           roll: {user?.roll}
+          </span>
 
         <h1 className="mt-3 text-2xl font-bold text-gray-800">{user?.displayName}</h1>
         <p className="text-gray-500">{user?.email}</p>

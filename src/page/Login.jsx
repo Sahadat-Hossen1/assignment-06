@@ -2,15 +2,18 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
 import auth from "../firebase/firebase";
 import { NavLink, useNavigate } from "react-router";
+import { useAuth } from "../context/AuthContext";
+import Notification from "../components/notification/Notification";
 
 export default function Login() {
   const navigate = useNavigate();
+  const [error, setError] = useState(null);
+  const { notification, setNotification } = useAuth();
   //class name
 
   const inputClassName =
     "w-full  py-2.5 md:py-3 pl-2  text-sm md:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200";
   const labelClassName = "block text-sm font-medium text-gray-700";
-  const [error, setError] = useState(null);
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -20,12 +23,20 @@ export default function Login() {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        if (!error) {
+        if (user) {
+          setNotification({
+            message: "Login Successfuly",
+            type: "success",
+          });
           navigate("/profile");
         }
       })
       .catch((error) => {
         setError(error.message);
+         setNotification({
+            message: error.message,
+            type: "error",
+          });
         // console.log(error);
       });
     form.reset();
@@ -116,6 +127,12 @@ export default function Login() {
           </div>
         </div>
       </div>
+{notification.message && (
+  <Notification
+    message={notification.message}
+    type={notification.type}
+  />
+)}
     </div>
   );
 }
