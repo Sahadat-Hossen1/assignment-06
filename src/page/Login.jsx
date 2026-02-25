@@ -127,7 +127,7 @@ export default function Login() {
           </div>
         </div>
       </div>
-{notification.message && (
+{notification.message !== "" && (
   <Notification
     message={notification.message}
     type={notification.type}

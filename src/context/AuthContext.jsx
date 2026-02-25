@@ -6,7 +6,7 @@ import {
 import React, { createContext, useContext, useEffect, useState } from "react";
 import auth, { db } from "../firebase/firebase";
 import { log } from "firebase/firestore/pipelines";
-import { Navigate } from "react-router";
+import { Navigate, useNavigate } from "react-router";
 import { doc, getDoc,  } from "firebase/firestore";
 
 //
@@ -20,43 +20,41 @@ export default function AuthProvider({ children }) {
   type: "",
 });
   const [user, setUser] = useState({});
-console.log(user?.roll);
+  useEffect(() => {
+  if (notification.message) {
+    const timer = setTimeout(() => {
+      setNotification({
+        message: "",
+        type: "",
+      });
+    }, 2000); // 2 seconds
 
-  //authstate change
-  // useEffect(() => {
-  //  const unsubcribe= onAuthStateChanged(auth, (user) => {
-  //     if (user) {
-  //       setUser(user);
-  //       setIsLogin(true)
-  //     } else {
-  //       console.log("no user found");
-  //     }
-  //   });
-  //   return ()=> unsubcribe()
-  // }, []);
+    return () => clearTimeout(timer);
+  }
+}, [notification.message]);
+ //
     useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (authUser) => {
       if (authUser) {
-        // 🔹 get firestore user
+       
         const docRef = doc(db, "users", authUser.uid);
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
-          // 🔥 merge auth + firestore
+         
           setUser({
             uid: authUser.uid,
             email: authUser.email,
             roll: docSnap.data().roll,
             displayName: authUser.displayName,
             photoURL: authUser.photoURL,
-            ...docSnap.data(), // role, name etc
+            ...docSnap.data(), 
           });
         } else {
-          // only auth user
+         
           setUser(authUser);
         }
 
-        setIsLogin(true);
       } else {
         setUser(null);
       }
@@ -69,7 +67,6 @@ console.log(user?.roll);
     signOut(auth)
       .then(()=>{
         setUser(null)
-        return <Navigate to="/"/>
       })
       .catch((error) => console.log(error));
   };

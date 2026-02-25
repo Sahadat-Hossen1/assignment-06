@@ -12,7 +12,7 @@ export default function Notification({ message, type }) {
   };
 
   return (
-    <div className={`${baseStyle} ${styles[type]}`}>
+    <div className={`${baseStyle} ${styles[type] || "bg-gray-500"} transition-all duration-300`}>
       {message}
     </div>
   );
