@@ -20,18 +20,7 @@ export default function AuthProvider({ children }) {
   type: "",
 });
   const [user, setUser] = useState({});
-  useEffect(() => {
-  if (notification.message) {
-    const timer = setTimeout(() => {
-      setNotification({
-        message: "",
-        type: "",
-      });
-    }, 2000); // 2 seconds
-
-    return () => clearTimeout(timer);
-  }
-}, [notification.message]);
+  
  //
     useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (authUser) => {
@@ -76,8 +65,7 @@ export default function AuthProvider({ children }) {
     setIsLogin,
     isLoading,
     setIsLoading,
-      notification,
-    setNotification,
+     
     
     user,
     LogOut

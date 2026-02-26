@@ -4,6 +4,7 @@ import auth from "../firebase/firebase";
 import { NavLink, useNavigate } from "react-router";
 import { useAuth } from "../context/AuthContext";
 import Notification from "../components/notification/Notification";
+import { toast } from "react-toastify";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -24,20 +25,15 @@ export default function Login() {
       .then((userCredential) => {
         const user = userCredential.user;
         if (user) {
-          setNotification({
-            message: "Login Successfuly",
-            type: "success",
-          });
+          
+          toast.success("Login Successfully");
           navigate("/profile");
         }
       })
       .catch((error) => {
         setError(error.message);
-         setNotification({
-            message: error.message,
-            type: "error",
-          });
-        // console.log(error);
+        toast.error(error.message);
+       
       });
     form.reset();
   };
@@ -127,12 +123,7 @@ export default function Login() {
           </div>
         </div>
       </div>
-{notification.message !== "" && (
-  <Notification
-    message={notification.message}
-    type={notification.type}
-  />
-)}
+
     </div>
   );
 }

@@ -10,6 +10,7 @@ import { doc, setDoc } from "firebase/firestore";
 
 import { NavLink, useNavigate } from "react-router";
 import SignUp_With_Google from "../components/googleSignup/SignUP_With_Google";
+import { toast } from "react-toastify";
 
 export default function SignUp() {
   //class name
@@ -48,8 +49,10 @@ export default function SignUp() {
         });
         navigae("/profile");
       }
+      toast.success("Account Created Successfully");
     } catch (error) {
       setError(error.message);
+      toast.error(error.message);
     }
     form.reset();
   };

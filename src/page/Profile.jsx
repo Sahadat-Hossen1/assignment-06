@@ -1,6 +1,7 @@
 import React from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 export default function Profile() {
   const navigate = useNavigate();
@@ -12,6 +13,8 @@ export default function Profile() {
   // 
   const handleSignOut = async() => {
     await LogOut();
+    toast.success("Logout Successfully");
+    
     setTimeout(() => {
       return navigate("/");
     }, 2000);
