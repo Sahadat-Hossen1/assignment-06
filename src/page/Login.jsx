@@ -3,13 +3,11 @@ import React, { useState } from "react";
 import auth from "../firebase/firebase";
 import { NavLink, useNavigate } from "react-router";
 import { useAuth } from "../context/AuthContext";
-import Notification from "../components/notification/Notification";
 import { toast } from "react-toastify";
 
 export default function Login() {
   const navigate = useNavigate();
   const [error, setError] = useState(null);
-  const { notification, setNotification } = useAuth();
   //class name
 
   const inputClassName =
@@ -25,7 +23,6 @@ export default function Login() {
       .then((userCredential) => {
         const user = userCredential.user;
         if (user) {
-          
           toast.success("Login Successfully");
           navigate("/profile");
         }
@@ -33,7 +30,6 @@ export default function Login() {
       .catch((error) => {
         setError(error.message);
         toast.error(error.message);
-       
       });
     form.reset();
   };
@@ -123,7 +119,6 @@ export default function Login() {
           </div>
         </div>
       </div>
-
     </div>
   );
 }

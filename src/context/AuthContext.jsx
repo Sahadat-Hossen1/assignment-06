@@ -15,10 +15,6 @@ export default function AuthProvider({ children }) {
   //all state
   const [isLogin, setIsLogin] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [notification, setNotification] = useState({
-  message: "",
-  type: "",
-});
   const [user, setUser] = useState({});
   
  //
