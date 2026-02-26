@@ -20,7 +20,7 @@ const {isLogin,user}=useAuth()
           </NavLink>
         </li>
         <li>
-          {isLogin && user?.uid ? (
+          { user?.uid ? (
             <NavLink to="/profile" className={linkClass}>
               profile
             </NavLink>
