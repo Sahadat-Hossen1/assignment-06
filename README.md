@@ -13,7 +13,6 @@ This app allows users to create an account, log in securely, and manage authenti
 
 ## 📸 Screenshots
 ![alt text](<src/assets/Screenshot (171).png>)
-![alt text](<src/assets/Screenshot (171).png>)
 ![alt text](<src/assets/Screenshot (172).png>)
 ![alt text](<src/assets/Screenshot (174).png>)
 ![alt text](<src/assets/Screenshot (176).png>)
