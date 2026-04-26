@@ -31,6 +31,7 @@ This app allows users to create an account, log in securely, and manage authenti
 - 👤 User authentication state handling
 - ⚡ Fast and responsive UI
 - 📱 Mobile-friendly design
+- use tooster for notification
 
 ---
 
