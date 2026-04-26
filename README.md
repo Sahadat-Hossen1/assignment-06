@@ -13,9 +13,11 @@ This app allows users to create an account, log in securely, and manage authenti
 
 ## 📸 Screenshots
 
-![Login Page](./src/assets/login.png)
-![Register Page](./src/assets/register.png)
-![Dashboard](./src/assets/dashboard.png)
+![alt text](<src/assets/Screenshot (171).png>)
+![alt text](<src/assets/Screenshot (172).png>)
+![alt text](<src/assets/Screenshot (174).png>)
+![alt text](<src/assets/Screenshot (176).png>)
+![alt text](<src/assets/Screenshot (177).png>)
 
 > ⚠️ Add screenshots inside `src/assets/` folder
 > and update file names if needed
@@ -24,21 +26,21 @@ This app allows users to create an account, log in securely, and manage authenti
 
 ## 🚀 Features
 
-* 🔑 User registration (Sign up)
-* 🔐 Secure login system
-* 🚪 Logout functionality
-* 👤 User authentication state handling
-* ⚡ Fast and responsive UI
-* 📱 Mobile-friendly design
+- 🔑 User registration (Sign up)
+- 🔐 Secure login system
+- 🚪 Logout functionality
+- 👤 User authentication state handling
+- ⚡ Fast and responsive UI
+- 📱 Mobile-friendly design
 
 ---
 
 ## 🛠️ Tech Stack
 
-* React.js
-* JavaScript (ES6+)
-* Firebase Authentication / Backend API
-* CSS / Tailwind CSS (if used)
+- React.js
+- JavaScript (ES6+)
+- Firebase Authentication / Backend API
+- CSS / Tailwind CSS (if used)
 
 ---
 
